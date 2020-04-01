@@ -15,5 +15,5 @@ const courseModelSchema = new Schema({
     flaggedStudents: {},
     flaggedStackExchangeUsers: {}
 }, {
-    timestamps = true
+    timestamps : true
 });

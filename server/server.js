@@ -15,8 +15,16 @@ mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true, useCreat
 );
 const connection = mongoose.connection;
 connection.once('open', () => {
-    console.log("MongoDB database connection established successfully");
+    console.log('MongoDB database connection established successfully');
 });
+
+const studentsRouter = require('./routes/students');
+const instructorsRouter = require('./routes/instructors');
+const coursesRouter = require('./routes/courses');
+
+app.use('/students', studentsRouter);
+app.use('/instructors', instructorsRouter);
+app.use('/courses', coursesRouter);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
