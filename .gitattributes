@@ -1,0 +1,8 @@
+* text=auto
+
+* text eol=crlf
+* text eol=lf
+
+*.jpg binary
+
+my_path/**/*.jpg binary
