@@ -8,13 +8,12 @@ var Schema = mongoose.Schema;
 
 var instructorSchema = new Schema({
         // instructor email, used as unique identifier amongst instructors, though not necessarily amongst students
-	email: {type: String, required: true, unique: true},
+	email: {type: String, required: true, trim: true, unique: true},
         // instructor password, as of now there are no requirements for the password
 	password: {type: String, required: true},
-        firstName: { type: String },
-        lastName: { type: String },
-        // TODO: complete schema
-        courses: {},
+        firstName: { type: String, default: "Mango" },
+        lastName: { type: String, default: "Mangosteen" },
+        courses: [mongoose.Schema.ObjectId],
     });
 
 // export instructorSchema as a class called Instructor
