@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class ExercisesList extends Component {
   constructor(props) {
@@ -29,15 +30,19 @@ export default class ExercisesList extends Component {
   onSubmit(e) {
     e.preventDefault();
   
-    const login = {
-      email: this.state.email,
-      password: this.state.password
-    };
+    const email = this.state.email;
+    const password = this.state.password;
   
-    console.log(login);
-    
-    // TODO: redirect to student home page
-    window.location = '/';
+    axios.get(`http://localhost:5000/students/authenticate/${email}/${password}`)
+      .then(res => {
+        if (res.status === 200) {
+          // TODO: redirect to student home page
+          window.location = '/';
+          console.log("Authentication successfull!");
+        }
+      })
+      // TODO: handle authentication failure on front end
+      .catch((err) => console.log('Authentication failed :('));
   }
 
   render() {
