@@ -37,8 +37,15 @@ router.route('/create').post((req, res) => {
   const newInstructor = new Instructor({ email, password, firstName, lastName, courses });
 
   newInstructor.save()
-    .then(() => res.json('New instructor added!'))
+    .then(() => res.sendStatus(200))
     .catch(err => res.status(400).json(`Error: ${err}`));
+});
+
+// return the list of courses that an instructor is in
+router.route('/getCourses/:email').get((req, res) => {
+  Instructor.findOne({ email: req.params.email })
+      .then((instructor) => res.json(instructor.courses))
+      .catch(err => res.status(400).json('Error: ' + err));
 });
 
 module.exports = router;
