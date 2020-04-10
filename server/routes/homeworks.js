@@ -8,7 +8,19 @@ router.route('/').get((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
-// Add a submission to a specific homework
+// Add a question answer to a specific homework question
+router.route('/addAnswer').post((req, res) => {
+    Homework.findOne({name: req.body.homeworkName})
+        .then((homework) => {
+          homework.questions.forEach((question) => {
+            if (question.number == req.body.questionNumber) {
+              question.submissions.push(req.body.answer);
+              res.sendStatus(200);
+            }
+          });
+        })
+        .catch(err => res.status(400).json('Error: ' + err));
+});
 
 
 module.exports = router;
