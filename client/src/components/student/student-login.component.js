@@ -39,7 +39,7 @@ export default class StudentLogin extends Component {
       .then(res => {
         if (res.status === 200) {
           // TODO: redirect to student home page
-          window.location = '/';
+          window.location = '/studentapp';
           console.log("Authentication successfull!");
         }
       })
