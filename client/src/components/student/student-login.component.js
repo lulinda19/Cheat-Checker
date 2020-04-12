@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Alert from 'react-bootstrap/Alert';
 
 export default class StudentLogin extends Component {
   constructor(props) {
@@ -55,6 +56,16 @@ export default class StudentLogin extends Component {
     return (
       <div>
       <h3>Login</h3>
+      {
+        this.state.failure ?
+        <Alert variant="danger" onClose={() => this.setState({ failure: false })} dismissible>
+          <Alert.Heading>Authentication failed!</Alert.Heading>
+          <p>
+            Incorrect email or password.
+          </p>
+        </Alert>
+        : null
+      }
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
           <label>Email: </label>

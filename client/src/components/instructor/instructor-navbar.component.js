@@ -10,10 +10,10 @@ export default class InstructorNavbar extends Component {
         <div className="collapse navbar-collapse">
         <ul className="navbar-nav mr-auto">
           <li className="navbar-item">
-          <Link to="/login" className="nav-link">Login</Link>
+          <Link to="/instructor/login" className="nav-link">Login</Link>
           </li>
           <li className="navbar-item">
-          <Link to="/create" className="nav-link">Create Account</Link>
+          <Link to="/instructor/create" className="nav-link">Create Account</Link>
           </li>
         </ul>
         </div>

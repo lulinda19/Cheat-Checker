@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
 
-export default class ExercisesList extends Component {
+export default class CreateStudentAccount extends Component {
   constructor(props) {
     super(props);
 
