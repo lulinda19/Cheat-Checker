@@ -41,6 +41,10 @@ export default class InstructorLogin extends Component {
           // TODO: redirect to instructor home page
           window.location = '/';
           console.log("Authentication successfull!");
+        } else {
+          this.setState({
+            failure: true
+          });
         }
       })
       // TODO: handle authentication failure on front end

@@ -41,6 +41,10 @@ export default class StudentLogin extends Component {
           // TODO: redirect to student home page
           window.location = '/studentapp';
           console.log("Authentication successfull!");
+        } else {
+          this.setState({
+            failure: true
+          });
         }
       })
       // TODO: handle authentication failure on front end

@@ -14,7 +14,7 @@ router.route('/addAnswer').post((req, res) => {
         .then((homework) => {
           homework.questions.forEach((question) => {
             if (question.number == req.body.questionNumber) {
-              question.submissions.push(req.body.answer);
+              question.submissions.push({email: req.body.email, answerText: req.body.answer});
               res.sendStatus(200);
             }
           });

@@ -21,6 +21,8 @@ router.route('/authenticate/:email/:password').get((req, res) => {
     .then((instructor) => {
       if (req.params.password == instructor.password) {
         res.sendStatus(200);
+      } else {
+        res.sendStatus(400);
       }
     })
     .catch(err => res.status(400).json('Error: ' + err));
