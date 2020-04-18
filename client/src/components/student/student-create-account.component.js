@@ -61,7 +61,7 @@ export default class CreateStudentAccount extends Component {
     })
       .then(res => {
         if (res.status === 200) {
-          // TODO: redirect to student home page
+          // TODO: redirect to student home page 
           window.location = '/';
           console.log("Create student account successfull!");
         }

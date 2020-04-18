@@ -4,31 +4,33 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Landing from "./components/landing.component";
 import Student from "./components/student/student.component";
+import StudentApp from "./components/student/studentapp.component"
 import Instructor from "./components/instructor/instructor.component";
-import StudentApp from "./components/studentapp/studentapp.component";
-import InstructorApp from "./components/instructorapp/instructorapp.component";
+import InstructorApp from "./components/instructor/instructorapp.component";
 
 function App() {
   return (
+    <div>
     <Router>
       <Switch>
         <Route exact path="/">
           <Landing />
         </Route>
+        <Route path="/student/home">
+          <StudentApp />
+        </Route>
         <Route path="/student">
           <Student />
+        </Route>
+        <Route path="/instructor/home">
+          <InstructorApp />
         </Route>
         <Route path="/instructor">
           <Instructor />
         </Route>
-        <Route path="/studentapp">
-          <StudentApp />
-        </Route>
-        <Route path="/instructorapp">
-          <InstructorApp />
-        </Route>
       </Switch>
     </Router>
+    </div>
   );
 }
 

@@ -5,18 +5,23 @@ import Container from 'react-bootstrap/Container'
 import StudentNavbar from "./student-navbar.component";
 import StudentLogin from "./student-login.component";
 import CreateStudentAccount from "./student-create-account.component";
+import StudentApp from "./studentapp.component"
+
 
 export default class Student extends Component {
   render () {
     return (
-      <Router>
-        <Container>
-          <StudentNavbar />
-          <br />
-          <Route path="/student/login" component = {StudentLogin} />
-          <Route path="/student/create" component = {CreateStudentAccount} />
-        </Container>
-      </Router>
+      <div>
+        <Router>
+          <Container>
+            <StudentNavbar />
+            <br />
+              <Route path="/student/login" component = {StudentLogin} />
+              <Route path="/student/create" component = {CreateStudentAccount} />
+          </Container>
+          <Route path="/student/home" component = {StudentApp} />
+        </Router>
+      </div>
     );
   }
 }

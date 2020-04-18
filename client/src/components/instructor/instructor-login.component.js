@@ -39,7 +39,7 @@ export default class InstructorLogin extends Component {
       .then(res => {
         if (res.status === 200) {
           // TODO: redirect to instructor home page
-          window.location = '/';
+          window.location = '/instructor/home';
           console.log("Authentication successfull!");
         } else {
           this.setState({

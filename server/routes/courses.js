@@ -8,4 +8,52 @@ router.route('/').get((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
+// Add an answer to a specific homework question
+router.route('/addAnswer').post((req, res) => {
+  Course.findOne({joinCode: req.body.joinCode})
+    .then((course) => {
+      let b = true;
+      course.homeworks.forEach((homework) => {
+        if (homework.name == req.body.homeworkName) {
+          homework.questions.forEach((question) => {
+            if (question.number == req.body.questionNumber) {
+              question.submissions.push({email: req.body.email, answerText: req.body.answer});
+              res.sendStatus(200);
+              b = false;
+            }
+          });
+        }
+      });
+      if (b) {
+        res.sendStatus(201);
+      }
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// Add a homework question to a specific homework
+router.route('/addQuestion').post((req, res) => {
+  Course.findOne({joinCode: req.body.joinCode})
+    .then((course) => {
+      let b = true;
+      course.homeworks.forEach((homework) => {
+        if (homework.name == req.body.homeworkName) {
+          homework.questions.forEach((question) => {
+            if (question.number == req.body.questionNumber) {
+              b = false;
+            }
+          });
+
+          if (b) {
+            homework.questions.push({number: req.body.questionNumber, questionText: req.body.questionText, submissions: []});
+            res.sendStatus(200);
+          } else {
+            res.sendStatus(201);
+          }
+        }
+      });
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 module.exports = router;

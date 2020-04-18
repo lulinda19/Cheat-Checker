@@ -9,7 +9,7 @@ const homeworkSchema = new Schema({
   endMonitoringDate: { type: Date, required: true },
   keywords: [{ type: String, trim: true }],
   questions: [{
-    number: Number,
+    number: String,
     questionText: String,
     submissions: [{
       email: String,

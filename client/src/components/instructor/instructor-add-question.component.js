@@ -9,14 +9,14 @@ export default class ExercisesList extends Component {
     this.onChangeCourseCode = this.onChangeCourseCode.bind(this);
     this.onChangeHomeworkName = this.onChangeHomeworkName.bind(this);
     this.onChangeQuestionNumber = this.onChangeQuestionNumber.bind(this);
-    this.onChangeAnswerText = this.onChangeAnswerText.bind(this);
+    this.onChangeQuestionText = this.onChangeQuestionText.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       courseCode: '',
       homeworkName: '',
       questionNumber: '',
-      answerText: '',
+      questionText: '',
       failure: false
     }
   }
@@ -39,9 +39,9 @@ export default class ExercisesList extends Component {
     });
   }
 
-  onChangeAnswerText(e) {
+  onChangeQuestionText(e) {
     this.setState({
-      answerText: e.target.value
+      questionText: e.target.value
     });
   }
 
@@ -51,44 +51,44 @@ export default class ExercisesList extends Component {
     const courseCode = this.state.courseCode;
     const homeworkName = this.state.homeworkName;
     const questionNumber = this.state.questionNumber;
-    const answerText = this.state.answerText;
+    const questionText = this.state.answerText;
   
-    axios.post(`http://localhost:5000/courses/addAnswer`, {
+    axios.post(`http://localhost:5000/homeworks/addQuestion`, {
       joinCode: courseCode,
       homeworkName: homeworkName,
       questionNumber: questionNumber,
-      answer: answerText
+      questionText: questionText
     })
       .then(res => {
         if (res.status === 200) {
           // TODO: redirect to student home page
-          window.location = '/answersuccess';
-          console.log("Add answer successfull!");
+          window.location = '/instructor/home';
+          console.log("Add question successfull!");
         }
       })
       .catch((err) => {
         this.setState({
           failure: true
         })
-        console.log('Create student account failed :(')
+        console.log('Add question failed :(')
       });
   }
 
   render() {
     return (
       <div>
-      <h3>Add Answer to Homework Question</h3>
+      <h3>Add New Homework Question</h3>
       {
         this.state.failure ?
         <Alert variant="danger" onClose={() => this.setState({ failure: false })} dismissible>
-          <Alert.Heading>Could not add answer!</Alert.Heading>
+          <Alert.Heading>Could not add question!</Alert.Heading>
         </Alert>
         : null
       }
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
           <label>Course Number: </label>
-           <input  type="text"
+          <input  type="text"
               required
               className="form-control"
               value={this.state.courseCode}
@@ -97,7 +97,7 @@ export default class ExercisesList extends Component {
         </div>
         <div className="form-group">
           <label>Homework Name: </label>
-            <input 
+          <input 
               type="text" 
               className="form-control"
               value={this.state.homeworkName}
@@ -107,7 +107,7 @@ export default class ExercisesList extends Component {
 
         <div className="form-group">
           <label>Question Number: </label>
-            <input 
+          <input 
               type="text" 
               className="form-control"
               value={this.state.questionNumber}
@@ -116,17 +116,17 @@ export default class ExercisesList extends Component {
         </div>
 
         <div className="form-group">
-          <label>Answer Text</label>
+          <label>Question Text: </label>
           <input 
               type="text" 
               className="form-control"
-              value={this.state.answerText}
-              onChange={this.onChangeAnswerText}
+              value={this.state.questionText}
+              onChange={this.onChangeQuestionText}
               />
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Add Answer" className="btn btn-primary" />
+          <input type="submit" value="Add Question" className="btn btn-primary" />
         </div>
       </form>
     </div>

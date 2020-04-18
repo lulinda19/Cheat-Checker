@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Alert from 'react-bootstrap/Alert';
+import StudentApp from './studentapp.component';
 
 export default class StudentLogin extends Component {
   constructor(props) {
@@ -39,7 +40,7 @@ export default class StudentLogin extends Component {
       .then(res => {
         if (res.status === 200) {
           // TODO: redirect to student home page
-          window.location = '/studentapp';
+          window.location = '/student/home';
           console.log("Authentication successfull!");
         } else {
           this.setState({

@@ -11,7 +11,12 @@ router.route('/').get((req, res) => {
 router.route('/addQuestion').post((req, res) => {
     Homework.findOne({name: req.body.homeworkName})
       .then((homework) => {
-        homework.questions.push({number: req.body.questionNumber.parseInt(), questionText: req.body.questionText, submissions: []});
+        homework.questions.push({number: req.body.questionNumber, questionText: req.body.questionText, submissions: []}).save()
+          .then(() => res.sendStatus(200))
+          .catch(err => res.status(400).json(`Error: ${err}`));
+        homework.save()
+          .then(() => res.sendStatus(200))
+          .catch(err => res.status(400).json(`Error: ${err}`));
         res.sendStatus(200);
       })
       .catch(err => res.status(400).json('Error: ' + err));
