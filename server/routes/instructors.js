@@ -43,6 +43,20 @@ router.route('/create').post((req, res) => {
     .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
+router.route('/create3').post((req, res) => {
+  const email = req.params.email;
+  const password = req.params.password;
+  const firstName = req.params.firstName;
+  const lastName = req.params.lastName;
+  const courses = [];
+
+  const newInstructor = new Instructor({ email, password, firstName, lastName, courses });
+
+  newInstructor.save()
+    .then(() => res.sendStatus(200))
+    .catch(err => res.status(400).json(`Error: ${err}`));
+});
+
 // url- http://localhost:5000/students/create2?email=hi@gmail.com&password=28736&firstName=joe&lastName=smith
 router.route('/create2').post((req, res) => {
   const email = req.query.email;
