@@ -74,6 +74,11 @@ export default class ExercisesList extends Component {
           // TODO: redirect to student home page
           window.location = '/student/home';
           console.log("Add answer successfull!");
+        } else {
+          this.setState({
+            failure: true
+          })
+          console.log('Add answer failed')
         }
       })
       .catch((err) => {

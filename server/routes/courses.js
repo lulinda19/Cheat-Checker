@@ -8,6 +8,13 @@ router.route('/').get((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
+// Get a list of all courses in database
+router.route('/').get((req, res) => {
+  Course.findOne({joinCode: req.body.joinCode})
+    .then(course => res.json(course.universalKeywords))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 // Add an answer to a specific homework question
 router.route('/addAnswer').post((req, res) => {
   Course.findOne({joinCode: req.body.joinCode})
