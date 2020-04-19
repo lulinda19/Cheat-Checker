@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Container from 'react-bootstrap/Container'
-import StudentNavbar from "./student-navbar.component";
+import StudentAppNavbar from "./studentapp-navbar.component";
 import SubmitAnswer from "./student-submit-answer.component";
 
 export default class StudentApp extends Component {
@@ -14,9 +14,9 @@ export default class StudentApp extends Component {
       <div>
       <Router>
         <Container>
-        <StudentNavbar />
+        <StudentAppNavbar />
             <br />
-              <Route path="/student/submit" component = {SubmitAnswer} />
+              <Route path="/student/add" component = {SubmitAnswer} />
         </Container>
       </Router>
     </div>      

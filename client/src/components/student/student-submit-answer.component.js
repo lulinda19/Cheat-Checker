@@ -6,6 +6,7 @@ export default class ExercisesList extends Component {
   constructor(props) {
     super(props);
 
+    this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangeCourseCode = this.onChangeCourseCode.bind(this);
     this.onChangeHomeworkName = this.onChangeHomeworkName.bind(this);
     this.onChangeQuestionNumber = this.onChangeQuestionNumber.bind(this);
@@ -13,12 +14,19 @@ export default class ExercisesList extends Component {
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
+      email: '',
       courseCode: '',
       homeworkName: '',
       questionNumber: '',
       answerText: '',
       failure: false
     }
+  }
+
+  onChangeEmail(e) {
+    this.setState({
+      email: e.target.value
+    });
   }
 
   onChangeCourseCode(e) {
@@ -48,12 +56,14 @@ export default class ExercisesList extends Component {
   onSubmit(e) {
     e.preventDefault();
   
+    const email = this.state.email;
     const courseCode = this.state.courseCode;
     const homeworkName = this.state.homeworkName;
     const questionNumber = this.state.questionNumber;
     const answerText = this.state.answerText;
   
     axios.post(`http://localhost:5000/homeworks/addAnswer`, {
+      email: email,
       joinCode: courseCode,
       homeworkName: homeworkName,
       questionNumber: questionNumber,
@@ -62,7 +72,7 @@ export default class ExercisesList extends Component {
       .then(res => {
         if (res.status === 200) {
           // TODO: redirect to student home page
-          window.location = '/answersuccess';
+          window.location = '/student/home';
           console.log("Add answer successfull!");
         }
       })
@@ -86,6 +96,15 @@ export default class ExercisesList extends Component {
         : null
       }
       <form onSubmit={this.onSubmit}>
+        <div className="form-group"> 
+          <label>Your email: </label>
+           <input  type="text"
+              required
+              className="form-control"
+              value={this.state.email}
+              onChange={this.onChangeEmail}
+              />
+        </div>
         <div className="form-group"> 
           <label>Course Number: </label>
            <input  type="text"

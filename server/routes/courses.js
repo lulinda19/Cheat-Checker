@@ -18,12 +18,16 @@ router.route('/addAnswer').post((req, res) => {
           homework.questions.forEach((question) => {
             if (question.number == req.body.questionNumber) {
               question.submissions.push({email: req.body.email, answerText: req.body.answer});
-              res.sendStatus(200);
               b = false;
             }
           });
         }
       });
+
+      if (b) {
+        res.sendStatus(201);
+      }
+      
       course.save()
         .then(() => res.sendStatus(200))
         .catch(err => res.status(400).json(`Error: ${err}`));

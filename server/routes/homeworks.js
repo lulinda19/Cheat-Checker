@@ -11,10 +11,14 @@ router.route('/').get((req, res) => {
 router.route('/addQuestion').post((req, res) => {
     Homework.findOne({name: req.body.homeworkName})
       .then((homework) => {
-        homework.questions.push({number: req.body.questionNumber, questionText: req.body.questionText, submissions: []});
-        homework.save()
-          .then(() => res.sendStatus(200))
-          .catch(err => res.status(400).json(`Error: ${err}`));
+        if (homework.courseCode == req.body.joinCode) {
+          homework.questions.push({number: req.body.questionNumber, questionText: req.body.questionText, submissions: []});
+          homework.save()
+            .then(() => res.sendStatus(200))
+            .catch(err => res.status(400).json(`Error: ${err}`));
+        } else {
+          res.sendStatus(291);
+        }
       })
       .catch(err => res.status(400).json('Error: ' + err));
 });
@@ -22,17 +26,22 @@ router.route('/addQuestion').post((req, res) => {
 router.route('/addAnswer').post((req, res) => {
   Homework.findOne({name: req.body.homeworkName})
     .then((homework) => {
-      if (homework.name == req.body.homeworkName) {
-        homework.questions.forEach((question) => {
-          if (question.number == req.body.questionNumber) {
-            question.submissions.push({email: req.body.email, answerText: req.body.answer});
-          }
-        });
-      }
+      if (homework.courseCode == req.body.joinCode) {
+        if (homework.name == req.body.homeworkName) {
+          homework.questions.forEach((question) => {
+            if (question.number == req.body.questionNumber) {
+              question.submissions.push({email: req.body.email, answerText: req.body.answer});
+            }
+          });
+        }
+      
 
       homework.save()
       .then(() => res.sendStatus(200))
       .catch(err => res.status(400).json(`Error: ${err}`));
+      } else {
+        res.sendStatus(291);
+      }
     });
 });
 
