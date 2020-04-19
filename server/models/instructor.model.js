@@ -13,7 +13,7 @@ var instructorSchema = new Schema({
 	password: {type: String, required: true},
         firstName: { type: String, default: "Mango" },
         lastName: { type: String, default: "Mangosteen" },
-        courses: [mongoose.Schema.ObjectId],
+        courses: [{ type: String }],
     });
 
 // export instructorSchema as a class called Instructor
