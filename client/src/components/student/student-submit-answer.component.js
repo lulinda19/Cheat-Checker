@@ -53,7 +53,7 @@ export default class ExercisesList extends Component {
     const questionNumber = this.state.questionNumber;
     const answerText = this.state.answerText;
   
-    axios.post(`http://localhost:5000/courses/addAnswer`, {
+    axios.post(`http://localhost:5000/homeworks/addAnswer`, {
       joinCode: courseCode,
       homeworkName: homeworkName,
       questionNumber: questionNumber,
