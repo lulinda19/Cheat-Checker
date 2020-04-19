@@ -8,6 +8,18 @@ router.route('/').get((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
+  // Get a list of all questions for homework in database
+  router.route('/questions').get((req, res) => {
+    let arr = [];
+    Homework.findOne({name: req.query.name})
+      .then(homework => {homework.questions.forEach((question) =>
+      arr.push(question.questionText));
+      res.json(arr);
+    })
+      .catch(err => res.status(400).json('Error: ' + err));
+  });
+  
+
 router.route('/addQuestion').post((req, res) => {
     Homework.findOne({name: req.body.homeworkName})
       .then((homework) => {
