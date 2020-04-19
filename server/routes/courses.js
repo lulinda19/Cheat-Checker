@@ -15,6 +15,16 @@ router.route('/keywords').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// add universal keywords to a course
+router.route('/addKeywords').get((req, res) => {
+  Course.findOne({joinCode: req.body.joinCode})
+    .then((course) => {
+      req.body.keywords.forEach((keyword) => course.universalKeywords.push(keyword));
+      res.sendStatus(200);
+    })
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 // Get a list of all students in database
 router.route('/students').get((req, res) => {
   Course.findOne({joinCode: req.query.joinCode})

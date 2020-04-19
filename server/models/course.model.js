@@ -8,7 +8,7 @@ const courseSchema = new Schema({
     universalKeywords: [{ type: String, trim: true }],
     students: [{ type: String, unique: true }],
     instructors: [{ type: String, unique: true }],
-    homeworks: [mongoose.Schema.ObjectId],
+    homeworks: [{ type: String, unique: true }],
     flags: [{
         homeworkName: String,
         questionNumber: String,
