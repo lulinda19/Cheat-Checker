@@ -16,11 +16,13 @@ router.route('/keywords').get((req, res) => {
 });
 
 // add universal keywords to a course
-router.route('/addKeywords').get((req, res) => {
+router.route('/addKeywords').post((req, res) => {
   Course.findOne({joinCode: req.body.joinCode})
     .then((course) => {
       req.body.keywords.forEach((keyword) => course.universalKeywords.push(keyword));
-      res.sendStatus(200);
+      course.save()
+        .then(() => res.sendStatus(200))
+        .catch(err => res.status(400).json(`Error: ${err}`));
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });
