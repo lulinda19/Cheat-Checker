@@ -12,6 +12,9 @@ export default class InstructorAppNavbar extends Component {
           <li className="navbar-item">
           <Link to="/instructor/add" className="nav-link">Add a new Question</Link>
           </li>
+          <li className="navbar-item">
+          <Link to="/instructor/keywords" className="nav-link">Add Universal Keywords</Link>
+          </li>
         </ul>
         </div>
       </nav>
