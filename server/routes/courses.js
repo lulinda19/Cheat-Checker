@@ -24,9 +24,9 @@ router.route('/addAnswer').post((req, res) => {
           });
         }
       });
-      if (b) {
-        res.sendStatus(201);
-      }
+      course.save()
+        .then(() => res.sendStatus(200))
+        .catch(err => res.status(400).json(`Error: ${err}`));
     })
     .catch(err => res.status(400).json('Error: ' + err));
 });
