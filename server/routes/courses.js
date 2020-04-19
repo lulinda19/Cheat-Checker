@@ -10,7 +10,7 @@ router.route('/').get((req, res) => {
 
 // Get a list of all universal keywords in database
 router.route('/keywords').get((req, res) => {
-  Course.findOne({joinCode: req.body.joinCode})
+  Course.findOne({joinCode: req.query.joinCode})
     .then(course => res.json(course.universalKeywords))
     .catch(err => res.status(400).json('Error: ' + err));
 });
