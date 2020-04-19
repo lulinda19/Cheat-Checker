@@ -11,9 +11,9 @@ const courseSchema = new Schema({
     homeworks: [mongoose.Schema.ObjectId],
     flags: [{
         homeworkName: String,
-        questionNumber: Number,
+        questionNumber: String,
         username: String,
-        student: mongoose.Schema.ObjectId,
+        student: String,
         keywords: [String],
         url: String
     }],
