@@ -34,6 +34,13 @@ router.route('/students').get((req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// Get a list of all homeworks in database
+router.route('/homeworks').get((req, res) => {
+  Course.findOne({joinCode: req.query.joinCode})
+    .then(course => res.json(course.homeworks))
+    .catch(err => res.status(400).json('Error: ' + err));
+});
+
 // Get a list of all flags in database
 router.route('/flags').get((req, res) => {
   Course.findOne({joinCode: req.query.joinCode})
