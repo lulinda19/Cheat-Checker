@@ -8,12 +8,47 @@ router.route('/').get((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
+// Change instructor name
+router.route('/updateName/:email/:firstName/:lastName').put((req, res) => {
+  Instructor.findOneAndUpdate({ email: req.params.email }, 
+      {"$set": { "firstName": req.params.firstName, "lastName": req.params.lastName}}, function (
+    err,
+    result
+  ) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+})
+
 // Get ONE instructor by email
 router.route('/email/:email').get((req, res) => {
     Instructor.findOne({ email: req.params.email })
         .then((instructor) => res.json(instructor))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
+// Get one instructor by id
+router.route('/id/:id').get((req, res) => {
+  Instructor.findById(id)
+      .then((instructor) => res.json(instructor))
+      .catch(err => res.status(400).json('Error: ' + err));
+});
+
+// Add course to instructor by course id and email
+router.route('/enroll/:email/:id').put((req,res) => {
+  Instructor.findOneAndUpdate({email: req.params.email},
+    {"$push": {courses: req.params.id}}, function(err, result) {
+    if(err){
+        res.send(err)
+    }
+    else{
+        res.send(result)
+    }
+  })
+})
 
 // Authenticate instructor given email and password. Returns { authentication: boolean }
 router.route('/authenticate/:email/:password').get((req, res) => {

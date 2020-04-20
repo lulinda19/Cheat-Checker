@@ -8,6 +8,51 @@ router.route('/').get((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
   });
 
+// Get a course name given a course id
+router.route('/getCourse/:id').get((req,res) => {
+  Course.findById(req.params.id)
+    .then(course => res.json(course))
+    .catch(err => res.status(500).json('Error: ' + err))
+})
+
+// Set a join code for course
+router.route('/setJoinCode/:id/:joinCode').put((req,res) => {
+  Course.findByIdAndUpdate(req.params.id, {"joinCode": req.params.joinCode}, function(err, result) {
+    if(err){
+        res.send(err)
+    }
+    else{
+        res.send(result)
+    }
+  })
+})
+
+// Add a student id to a course using join code
+router.route('/addStudent/:id/:joinCode').put((req,res) => {
+  Course.findOneAndUpdate({joinCode: req.params.joinCode},
+    {"$push": {students: req.params.id}}, function(err, result) {
+    if(err){
+        res.send(err)
+    }
+    else{
+        res.send(result)
+    }
+  })
+})
+
+// Add an instructor id to a course using join code
+router.route('/addInstructor/:id/:joinCode').put((req,res) => {
+  Course.findOneAndUpdate({joinCode: req.params.joinCode},
+    {"$push": {instructors: req.params.id}}, function(err, result) {
+    if(err){
+        res.send(err)
+    }
+    else{
+        res.send(result)
+    }
+  })
+})
+
 // Get a list of all universal keywords in database
 router.route('/keywords').get((req, res) => {
   Course.findOne({joinCode: req.query.joinCode})
