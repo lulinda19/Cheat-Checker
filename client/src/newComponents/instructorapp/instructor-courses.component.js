@@ -25,7 +25,7 @@ export default class instructorCourses extends React.Component {
   }
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (this.props.instructor.email != this.state.instructor.email) {
+    if (this.props.instructor.email !== this.state.instructor.email) {
       // Wipe the courses and add them back in one by one
       this.setState({
         instructor: this.props.instructor,

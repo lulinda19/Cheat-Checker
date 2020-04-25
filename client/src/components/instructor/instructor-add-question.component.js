@@ -61,7 +61,6 @@ export default class ExercisesList extends Component {
     })
       .then(res => {
         if (res.status === 200) {
-          // TODO: redirect to student home page
           window.location = '/instructor/home';
           console.log("Add question successfull!");
         }

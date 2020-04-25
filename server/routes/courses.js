@@ -2,9 +2,10 @@ const router = require('express').Router();
 let Course = require('../models/course.model');
 
 // Refresh course flags by scraping from stackexchange
-const cronJob = require('../stackexchange/cronjob');
 router.route('/refreshFlags').put((req, res) => {
-  cronJob.start();
+  const pullStackExchangeUpdate = require('../stackexchange/cronjob').pullStackExchangeUpdate;
+  pullStackExchangeUpdate();
+  res.send('refreshed');
 });
 
 // Get a list of all courses in database
