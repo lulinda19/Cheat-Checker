@@ -17,6 +17,13 @@ const courseSchema = new Schema({
         keywords: [String],
         url: String
     }],
+    universalFlags: [{
+        title: String,
+        url: String,
+        questionId: { type: String, unique: true },
+        user: String,
+        date: String
+    }]
 }, {
     timestamps : true
 });

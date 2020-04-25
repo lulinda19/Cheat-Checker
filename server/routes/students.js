@@ -15,6 +15,40 @@ router.route('/email/:email').get((req, res) => {
       .catch(err => res.status(400).json('Error: ' + err));
 });
 
+// Get one student by id
+router.route('/id/:id').get((req, res) => {
+  Student.findById(id)
+      .then((student) => res.json(student))
+      .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.route('/enroll/:email/:id').put((req,res) => {
+  Student.findOneAndUpdate({email: req.params.email},
+    {"$push": {courses: req.params.id}}, function(err, result) {
+    if(err){
+        res.send(err)
+    }
+    else{
+        res.send(result)
+    }
+  })
+})
+
+// Change student name
+router.route('/updateName/:email/:firstName/:lastName').put((req, res) => {
+  Student.findOneAndUpdate({ email: req.params.email }, 
+      {"$set": { "firstName": req.params.firstName, "lastName": req.params.lastName}}, function (
+    err,
+    result
+  ) {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(result);
+    }
+  });
+})
+
 // Authenticate student given email and password. Returns { authentication: boolean }
 router.route('/authenticate/:email/:password').get((req, res) => {
   Student.findOne({ email: req.params.email })
