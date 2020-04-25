@@ -8,9 +8,9 @@ var Schema = mongoose.Schema;
 
 var instructorSchema = new Schema({
         // instructor email, used as unique identifier amongst instructors, though not necessarily amongst students
-	email: {type: String, required: true, trim: true, unique: true},
+	email: {type: String, required: true, trim: true, unique: true,default: "lampshade@gmail.com"},
         // instructor password, as of now there are no requirements for the password
-	password: {type: String, required: true},
+	password: {type: String, required: true, default: "lampyLamp"},
         firstName: { type: String, default: "Mango" },
         lastName: { type: String, default: "Mangosteen" },
         courses: [{ type: String }],

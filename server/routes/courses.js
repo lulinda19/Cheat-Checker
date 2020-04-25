@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const bodyParser = require('body-parser');
+router.use(bodyParser.urlencoded({extended: true}));
 let Course = require('../models/course.model');
 
 // Get a list of all courses in database

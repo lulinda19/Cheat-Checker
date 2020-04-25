@@ -1,4 +1,6 @@
 const router = require('express').Router();
+const bodyParser = require('body-parser');
+router.use(bodyParser.urlencoded({extended: true}));
 let Instructor = require('../models/instructor.model');
 
 // Get a list of all instructors in database
@@ -35,7 +37,6 @@ router.route('/create').post((req, res) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const courses = [];
-
   const newInstructor = new Instructor({ email, password, firstName, lastName, courses });
 
   newInstructor.save()
