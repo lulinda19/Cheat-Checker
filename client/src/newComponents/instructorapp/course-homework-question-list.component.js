@@ -16,11 +16,12 @@ export default class CourseHomeworkList extends React.Component {
   }
 
   onClick = () => {
-    axios.put(`http://localhost:5000/homeworks/`)
+    axios.get(`http://localhost:5000/homeworks/`)
       .then( res => {
         let homeworksToShow = [];
-        res.homeworks.forEach((homework) => {
-            if (homework.name == this.props.course.name) {
+        res.data.forEach((homework) => {
+            if (homework.courseCode == this.props.course.joinCode) {
+                console.log(homework)
                 homeworksToShow.push(homework);
             }
         });
@@ -36,7 +37,7 @@ export default class CourseHomeworkList extends React.Component {
     let homeworkComponents = this.state.homeworks.map(
       (homework) => (
         <div>
-          <Homework homework={homework} />
+          <Homework homework={homework} key={homework}/>
           <br />
         </div>
       )
@@ -45,9 +46,9 @@ export default class CourseHomeworkList extends React.Component {
     return (
       <React.Fragment>
         <Alert show={this.state.updated} variant="success" dismissible onClose={() => this.setState({updated: false})}>
-          Homeworks were updated successfully!
+          Homeworks were retrieved successfully!
         </Alert>
-        <Button variant="outline-dark" type="button" onClick={this.onClick}>Refresh Homeworks</Button>
+        <Button variant="outline-dark" type="button" onClick={this.onClick}>Get Homeworks</Button>
         <br/>
         <br/>
         { homeworkComponents }
