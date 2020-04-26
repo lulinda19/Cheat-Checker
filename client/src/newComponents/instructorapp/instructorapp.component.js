@@ -9,6 +9,7 @@ import InstructorCourses from './instructor-courses.component'
 import InstructorProfile from './instructor-profile.component'
 import InstructorAddQuestion from './instructor-add-question.component'
 import InstructorFlags from './instructor-flags.component'
+import InstructorViewQuestions from "./instructor-view-homework-problems.component"
 
 class InstructorApp extends React.Component {
   constructor(props) {
@@ -56,6 +57,9 @@ class InstructorApp extends React.Component {
             <Nav.Link eventKey="add-question" href="/instructorapp/addQuestion">Add Question</Nav.Link>
           </Nav.Item>
           <Nav.Item>
+            <Nav.Link eventKey="view-questions" href="/instructorapp/viewQuestions">View Questions</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
             <Nav.Link eventKey="profile" href="/instructorapp/profile">Profile</Nav.Link>
           </Nav.Item>
           <Nav.Item>
@@ -75,6 +79,9 @@ class InstructorApp extends React.Component {
           </Route>
           <Route path="/instructorapp/addQuestion">
             <InstructorAddQuestion instructor={this.state.instructor}/>
+          </Route>
+          <Route path="/instructorapp/viewQuestions">
+            <InstructorViewQuestions instructor={this.state.instructor}/>
           </Route>
           <Route path="/instructorapp/viewFlags">
             <InstructorFlags instructor={this.state.instructor}/>
